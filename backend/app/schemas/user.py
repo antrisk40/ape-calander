@@ -13,4 +13,9 @@ class UserCreate(UserBase):
 class UserOut(UserBase):
     id: int
 
-    model_config = {"from_attributes": True}  
+    model_config = {"from_attributes": True}
+    
+# Define Pydantic model for login request
+class LoginRequest(BaseModel):
+    email: str
+    password: str  

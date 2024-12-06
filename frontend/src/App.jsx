@@ -1,31 +1,23 @@
-import React from 'react';
-//import DoctorCard from "./component/doctorcart/Cart"; // Make sure this path is correct
-// import Carbonfootprint from "./component/doctorcart/Dashboard"; 
-// import LandingPage from "./components/doctorcart/Homepage"
-import LandingPage from './component/cart/Homepage.jsx';
-import Login from './component/cart/Login.jsx'; 
-import SignUpForm from './component/cart/SignUpForm.jsx';// Make sure this path is correct
+import React from "react";
+// Ensure all import paths are correct
+import Home from "./pages/Home.jsx";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
+
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 function App() {
   return (
-    <>
-      <div style={{ padding: 20 }}>
+    <div>
       <Router>
         <Routes>
-          <Route exact path="/Homepage" component={LandingPage} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={SignUpForm} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
-        {/* <LandingPage /> */}
-      </div>
-
-      
-    </>
+    </div>
   );
 }
 
 export default App;
-
-
-

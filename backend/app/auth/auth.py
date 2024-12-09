@@ -1,9 +1,7 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from jose import JWTError, jwt
-from backend.app.models.user import User
 from backend.app.crud.user import get_user_by_email
 from passlib.context import CryptContext
-from datetime import timezone
 
 SECRET_KEY = "secret"  # Store this securely
 ALGORITHM = "HS256"
@@ -24,9 +22,12 @@ def create_access_token(data: dict, expires_delta: timedelta = timedelta(minutes
     return encoded_jwt
 
 # Function to authenticate user
-def authenticate_user(db, email: str, password: str):
-    print("logging in users") 
-    user = get_user_by_email(db, email)
-    if user is None or not verify_password(password, user.password):
-        return None
-    return user
+def authenticate_user(email: str, password: str):
+    try:
+        user = get_user_by_email(email)  # Fetch the user
+        if user is None or not verify_password(password, user["password"]):
+            return None
+        return user
+    except Exception as e:
+        raise Exception(f"Error during authentication: {str(e)}")
+
